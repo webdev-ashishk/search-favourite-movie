@@ -5,7 +5,6 @@ const Movies = () => {
   const { movie } = useGlobalContext();
   return (
     <>
-      <div>Movies</div>
       <section className="movie-page">
         <div className="container grid grid-4-col">
           {movie.map((currentMovie) => {

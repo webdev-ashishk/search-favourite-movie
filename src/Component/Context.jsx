@@ -1,11 +1,12 @@
 import React, { useContext, useEffect, useState } from "react";
 
 const AppContext = React.createContext();
-const API_URL = `http://www.omdbapi.com/?apikey=6f605eb6&s=titanic`;
+const API_URL = `http://www.omdbapi.com/?apikey=6f605eb6`;
 const AppProvider = ({ children }) => {
   const [isLoading, setIsLoading] = useState(true);
   const [movie, setMovie] = useState([]);
   const [isError, setIsError] = useState({ show: "false", msg: "" });
+  const [query, setQuery] = useState("hacker");
   async function getMovies(url) {
     try {
       const res = await fetch(url);
@@ -25,10 +26,10 @@ const AppProvider = ({ children }) => {
     }
   }
   useEffect(() => {
-    getMovies(API_URL);
-  }, []);
+    getMovies(`${API_URL}&s=${query}`);
+  }, [query]);
   return (
-    <AppContext.Provider value={{ isLoading, isError, movie }}>
+    <AppContext.Provider value={{ isLoading, isError, movie, query, setQuery }}>
       {children}
     </AppContext.Provider>
   );
