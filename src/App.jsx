@@ -1,16 +1,19 @@
 import "./App.css";
 import Home from "./Component/Home";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import SingleMovie from "./Component/SingleMovie";
 import Error from "./Component/Error";
+import { AppContext } from "./Component/Context";
 function App() {
   return (
     <>
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="movie/:id" element={<SingleMovie />} />
-        <Route path="*" element={<Error />} />
-      </Routes>
+      <AppContext.Provider value="AshishK">
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="movie/:id" element={<SingleMovie />} />
+          <Route path="*" element={<Error />} />
+        </Routes>
+      </AppContext.Provider>
     </>
   );
 }

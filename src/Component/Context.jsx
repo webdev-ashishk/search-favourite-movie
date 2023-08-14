@@ -1,7 +1,9 @@
-import React from "react";
+import React, { useContext } from "react";
 
-const Context = () => {
-  return <div>Context</div>;
+const AppContext = React.createContext();
+
+// global custom hook
+const useGlobalContext = () => {
+  return useContext(AppContext);
 };
-
-export default Context;
+export { AppContext, useGlobalContext };
