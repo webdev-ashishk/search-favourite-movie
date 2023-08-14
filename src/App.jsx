@@ -1,14 +1,16 @@
 import "./App.css";
-import Home from "./Home";
-import Movies from "./Movies";
-import Search from "./Search";
+import Home from "./Component/Home";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import SingleMovie from "./Component/SingleMovie";
+import Error from "./Component/Error";
 function App() {
   return (
     <>
-      <div>app.jsx</div>
-      <Home />
-      <Search />
-      <Movies />
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="movie/:id" element={<SingleMovie />} />
+        <Route path="*" element={<Error />} />
+      </Routes>
     </>
   );
 }
