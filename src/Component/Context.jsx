@@ -8,17 +8,22 @@ const AppProvider = ({ children }) => {
   const [isError, setIsError] = useState({ show: "false", msg: "" });
   const [query, setQuery] = useState("hacker");
   async function getMovies(url) {
+    setIsLoading(true);
     try {
       const res = await fetch(url);
       const data = await res.json();
       console.log(data);
       if (data.Response === "True") {
         setIsLoading(false);
+        setIsError({
+          show: false,
+          msg: "",
+        });
         setMovie(data.Search);
       } else {
         setIsError({
-          show: "true",
-          msg: data.error,
+          show: true,
+          msg: data.Error,
         });
       }
     } catch (error) {
@@ -29,7 +34,7 @@ const AppProvider = ({ children }) => {
     let timerOut = setTimeout(() => {
       getMovies(`${API_URL}&s=${query}`);
     }, 3000);
-    return () => clearTimeout(timerOut); 
+    return () => clearTimeout(timerOut);
   }, [query]);
   return (
     <AppContext.Provider value={{ isLoading, isError, movie, query, setQuery }}>
