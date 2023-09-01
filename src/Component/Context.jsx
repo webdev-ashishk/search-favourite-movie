@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 
 const AppContext = React.createContext();
-const API_URL = `http://www.omdbapi.com/?apikey=6f605eb6`;
+export const API_URL = "http://www.omdbapi.com/?apikey=6f605eb6";
 const AppProvider = ({ children }) => {
   const [isLoading, setIsLoading] = useState(true);
   const [movie, setMovie] = useState([]);
@@ -33,7 +33,7 @@ const AppProvider = ({ children }) => {
   useEffect(() => {
     let timerOut = setTimeout(() => {
       getMovies(`${API_URL}&s=${query}`);
-    }, 3000);
+    }, 500);
     return () => clearTimeout(timerOut);
   }, [query]);
   return (
